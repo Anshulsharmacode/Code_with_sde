@@ -1,26 +1,58 @@
-import time
+import json
 import sys
+import time
+import pygame
 
-script_lines = [
-    "Kyun dikhe mujhe tu sirhaane mere",
-    "Soch ke teri baatein hum muskurane lage Haaye haaye haaye!",
-    "Kyun dikhe mujhe tu sirhaane mere",
-    "Soch ke teri baatein hum muskurane lage",
-    "Dil se nikal ke aahein lafzon pe aane lagi",
-    "Kaisi teri khumari hai Hum gungunane lage 💕",
-    "Channa ve..... Channa ve.....",
-    "Kuch toh hai tere mere darmiyan kyun lage",
-    "Channa ve..... Channa ve.....",
-    "Kuch toh hai tere mere darmiyan kyun lage",
-]
-LINE_DURATION = 3.2  
+TYPE_SPEED = 0.08
+TITLE_SPEED = 0.06
+TITLE_PAUSE = 1.5
 
-for line in script_lines:
-    char_delay = LINE_DURATION / len(line)  
+AUDIO_FILE = "Dooron Dooron Unplugged Paresh Pahuja 320 Kbps.mp3"
 
-    for char in line:
+def type_text(text, speed):
+    for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(char_delay)
+        time.sleep(speed)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
+def play_lyrics(lyrics, start_time):
+    for line in lyrics:
+        now = time.time() - start_time
+        wait_time = max(0, line["time"] - now)
+        time.sleep(wait_time)
+        type_text(line["text"], TYPE_SPEED)
+
+if __name__ == "__main__":
+    # Load lyrics
+    with open("song.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Clear terminal
+    print("\033c", end="")
+
+    # 🎵 Print song title
+    print("\033[1m", end="")
+    type_text(data["title"], TITLE_SPEED)
+    print("\033[0m", end="")
+
+    time.sleep(TITLE_PAUSE)
     print()
-    time.sleep(1.7)   
+
+    # 🔊 Init audio
+    pygame.mixer.init()
+    pygame.mixer.music.load(AUDIO_FILE)
+
+    # ▶ START AUDIO
+    pygame.mixer.music.play()
+
+    # ⏱ START TIMER EXACTLY HERE
+    start_time = time.time()
+
+    # ▶ START LYRICS
+    play_lyrics(data["lyrics"], start_time)
+
+    # Keep script alive until audio ends
+    while pygame.mixer.music.get_busy():
+        time.sleep(0.1)

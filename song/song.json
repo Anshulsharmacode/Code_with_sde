@@ -1,0 +1,19 @@
+{
+  "title": "Sochu Ki Milne Te Bolenge Ki",
+  "lyrics": [
+    { "time": 0.0, "text": "Sochu Ki Milne Te Bolenge Ki" },
+    { "time": 2.6, "text": "Teri Ta Gallan Ch Shayari" },
+
+    { "time": 5.2, "text": "Oh Sochu Ki Milne Te Bolenge Ki" },
+    { "time": 7.8, "text": "Teri Ta Gallan Ch Shayari" },
+
+    { "time": 10.8, "text": "Vekhegi Mainu Te Sochegi Kya Tu?" },
+    { "time": 13.6, "text": "Mitti Da Banda Main Tu Ta Pari" },
+
+    { "time": 17.0, "text": "Ishq De Galliyaan Ch Khoya Ae Dil Ve" },
+    { "time": 20.2, "text": "Aas Lagaye Ki Aave Tu Mil Ve" },
+
+    { "time": 23.6, "text": "Kol Tere Mainu Aan De Soniyo" },
+    { "time": 26.8, "text": "Karaan Main Kitne Jatan Oh Soniyo" }
+  ]
+}
